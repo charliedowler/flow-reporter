@@ -44,7 +44,7 @@ module.exports = function (output) {
       }).join('')
 
       const descr = `${whitespace(message.start)}${carets(message.start, message.end)} ${message.descr}`
-      console.log(`  ${chalk.red.bold(lineNumber + ':')} ${context}`)
+      console.log(` ${chalk.red.bold(lineNumber + ':')} ${context}`)
       console.log(chalk.red.bold(`    ${descr}`))
     })
   })
