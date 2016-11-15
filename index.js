@@ -17,7 +17,7 @@ module.exports = function (output) {
       ':',
       lineNumber
     ].join('')
-    console.log(`${chalk.white.underline(lineHeading)}`)
+    console.log(`${chalk.red.underline(lineHeading)}`)
 
     var messages = error.message
     // Merge 'Comment' into 'Blame' to reproduce default flow output
@@ -44,8 +44,8 @@ module.exports = function (output) {
       }).join('')
 
       const descr = `${whitespace(message.start)}${carets(message.start, message.end)} ${message.descr}`
-      console.log(`  ${chalk.white.bold(lineNumber + ':')} ${context}`)
-      console.log(chalk.white.bold(`    ${descr}`))
+      console.log(`  ${chalk.red.bold(lineNumber + ':')} ${context}`)
+      console.log(chalk.red.bold(`    ${descr}`))
     })
   })
 }
