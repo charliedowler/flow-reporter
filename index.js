@@ -5,7 +5,12 @@ var _ = require('underscore')
 var whitespace = start => _.times(start, () => ' ').join('')
 var carets = (start, end) => _.times((end - start) + 1, () => '^').join('')
 
-module.exports = function (output) {
+module.exports = function (output, darkTheme = false) {
+
+  let themeTheme = () => {
+    return darkTheme ? chalk.black : chalk.white;
+  };
+
   output.forEach(error => {
     var firstMessage = error.message[0]
     var lineNumber = firstMessage.line
@@ -17,7 +22,7 @@ module.exports = function (output) {
       ':',
       lineNumber
     ].join('')
-    console.log(`${chalk.white.underline(lineHeading)}`)
+    console.log(`${themeTheme().underline(lineHeading)}`)
 
     var messages = error.message
     // Merge 'Comment' into 'Blame' to reproduce default flow output
@@ -44,8 +49,8 @@ module.exports = function (output) {
       }).join('')
 
       const descr = `${whitespace(message.start)}${carets(message.start, message.end)} ${message.descr}`
-      console.log(`  ${chalk.white.bold(lineNumber + ':')} ${context}`)
-      console.log(chalk.white.bold(`    ${descr}`))
+      console.log(`  ${themeTheme().bold(lineNumber + ':')} ${context}`)
+      console.log(themeTheme().bold(`    ${descr}`))
     })
   })
 }
