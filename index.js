@@ -30,18 +30,20 @@ module.exports = function (output) {
     messages = messages.filter(item => item.type !== 'Comment')
     messages.forEach(message => {
 
-      const context = message.context.split('').map((item, index) => {
-        var relativeIndex = index + 1
+      if (message.context) {
+          const context = message.context.split('').map((item, index) => {
+            var relativeIndex = index + 1
 
-        var indexInWarningBounds = (
-          (relativeIndex > message.start || relativeIndex === message.start)
-            && (relativeIndex < message.end || relativeIndex === message.end))
+            var indexInWarningBounds = (
+              (relativeIndex > message.start || relativeIndex === message.start)
+                && (relativeIndex < message.end || relativeIndex === message.end))
 
-        if (indexInWarningBounds) {
-          return chalk.red(item)
-        }
-        return item
-      }).join('')
+            if (indexInWarningBounds) {
+              return chalk.red(item)
+            }
+            return item
+          }).join('')
+      }
 
       const descr = `${whitespace(message.start)}${carets(message.start, message.end)} ${message.descr}`
       console.log(`  ${chalk.white.bold(lineNumber + ':')} ${context}`)
