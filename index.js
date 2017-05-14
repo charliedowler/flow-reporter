@@ -43,10 +43,10 @@ module.exports = function (output) {
             }
             return item
           }).join('')
+          console.log(`  ${chalk.white.bold(lineNumber + ':')} ${context}`)
       }
 
       const descr = `${whitespace(message.start)}${carets(message.start, message.end)} ${message.descr}`
-      console.log(`  ${chalk.white.bold(lineNumber + ':')} ${context}`)
       console.log(chalk.white.bold(`    ${descr}`))
     })
   })
